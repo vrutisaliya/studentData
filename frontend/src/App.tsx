@@ -10,6 +10,7 @@ import EditStudent from "./component/EditStudent";
 import Home from "./component/Home";
 import SignIn from "./component/SignIn";
 import Signup from "./component/Signup";
+import ViewStudent from "./component/ViewStudent";
 
 const App = () => {
   useEffect(() => {
@@ -43,6 +44,8 @@ const App = () => {
         <Route path="/signin" element={<SignIn onSignIn={handleSignIn} />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/add" element={<AddStudent />} />
+        <Route path="/view/:id" element={<ViewStudent />} />
+
         <Route path="/edit/:id" element={<EditStudent />} />
 
         <Route path="/" element={<PrivateRoute element={<Home />} />} />

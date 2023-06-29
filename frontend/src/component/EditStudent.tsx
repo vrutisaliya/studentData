@@ -218,7 +218,7 @@ const EditStudent = () => {
               </Grid>
               <Grid item xs={12}>
                 <Button type="submit" variant="contained" color="primary">
-                  Save
+                Update
                 </Button>
               </Grid>
             </Grid>

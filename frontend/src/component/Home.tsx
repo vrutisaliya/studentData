@@ -103,6 +103,9 @@ const Home = () => {
   const handleUpdateStudent = (studentId: string) => {
     navigate(`/edit/${studentId}`);
   };
+  const handleViewStudent = (studentId: string) => {
+    navigate(`/view/${studentId}`);
+  };
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const query = event.target.value.toLowerCase();
@@ -122,7 +125,7 @@ const Home = () => {
   };
   return (
     <div>
-      <Typography variant="h4" align="center" gutterBottom margin={5}>
+      <Typography variant="h4" align="center" gutterBottom margin={3}>
         Student List
       </Typography>
       <Grid
@@ -156,6 +159,8 @@ const Home = () => {
         <Table>
           <TableHead>
             <TableRow>
+            <TableCell>Sr.No</TableCell>
+
               <TableCell>Profile Image</TableCell>
               <TableCell>First Name</TableCell>
               <TableCell>Last Name</TableCell>
@@ -175,8 +180,9 @@ const Home = () => {
                 </TableCell>
               </TableRow>
             ) : (
-              filteredStudentList.map((student) => (
+              filteredStudentList.map((student,index) => (
                 <TableRow key={student._id}>
+                  <TableCell>{index + 1}</TableCell>
                   <TableCell>
                     <img
                       src={`data:image/png;base64,${student.profilePicture}`}
@@ -198,7 +204,7 @@ const Home = () => {
                       }
                       color="error"
                       variant="contained"
-                      style={{ marginRight: 10 }}
+                      style={{ marginRight: 2}}
                     >
                       Delete
                     </Button>
@@ -206,8 +212,17 @@ const Home = () => {
                       onClick={() => handleUpdateStudent(student._id)}
                       color="primary"
                       variant="contained"
+                      style={{ marginRight: 2 }}
                     >
-                      Update
+                      Edit
+                    </Button>
+                    <Button
+                      onClick={() => handleViewStudent(student._id)}
+                      variant="contained"
+                      color="success"
+                      style={{ marginRight:5 }}
+                    >
+                      View
                     </Button>
                   </TableCell>
                 </TableRow>
