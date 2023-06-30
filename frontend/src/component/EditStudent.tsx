@@ -82,7 +82,7 @@ const EditStudent = () => {
       reader.readAsDataURL(file);
     } else {
       await sendFormValues(values);
-      navigate("/");
+    
     }
   };
 

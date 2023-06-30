@@ -52,9 +52,24 @@ const AddStudent = () => {
     gender: Yup.string().required("Gender is required"),
     email: Yup.string().email("Invalid email").required("Email is required"),
     mobileNumber: Yup.string().required("Mobile Number is required"),
-    profilePicture: Yup.string(),
-  });
-
+    // profilePicture: Yup.string(),
+    profilePicture: Yup.mixed()
+    .test("fileSize", "File size is too large", (value: any) => {
+      if (value && value.length) {
+        const fileSize = value[0].size;
+        const maxSize = 5 * 1024 * 1024; // 5 MB
+        return fileSize <= maxSize;
+      }
+      return true;
+    })
+    .test("fileType", "Invalid file type", (value: any) => {
+      if (value && value.length) {
+        const fileType = value[0].type;
+        return fileType === "image/png" || fileType === "image/jpeg";
+      }
+      return true;
+    }),
+});
   const navigate = useNavigate();
   const [imagePreview, setImagePreview] = useState("");
 
@@ -269,7 +284,9 @@ const AddStudent = () => {
                 name="profilePicture"
                 onChange={handleImageChange}
               />
+                <ErrorMessage name="profilePicture" component="div" />
             </Grid>
+          
             {imagePreview && (
               <Grid item xs={12}>
                 <img
